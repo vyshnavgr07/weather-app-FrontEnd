@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+const baseurl=import.meta.env.VITE_BASE_URL
 const Registration = () => {
     const navigate=useNavigate()
     const [data,setData]=useState({
@@ -22,7 +22,7 @@ const handleClick=async(e)=>{
 e.preventDefault()
 console.log(data,"datum");
 try {
-    const response=await axios.post("http://localhost:3001/api/user/registration",data)
+    const response=await axios.post(`${baseurl}/registration`,data)
 console.log(response,'ress');
 if(response.status===201){
     setData(

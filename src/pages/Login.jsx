@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+const baseurl=import.meta.env.VITE_BASE_URL
+console.log(baseurl,"base");
 const Login = () => {
     const navigate=useNavigate()
     const[data,setData]=useState({
@@ -15,15 +16,16 @@ setData((prev)=>({
     ...prev,
     [name]:value
 }))
- }
+ } 
 
- const handleClick=(e)=>{
+ const handleClick=async(e)=>{
     e.preventDefault();
     try {
-        let response=axios.post('http://localhost:3001/api/user/login',data);
-        console.log(response);
-        if(response.status===200){
-            navigate('/home')
+        let response=await axios.post(`${baseurl}/login`,data);
+        console.log(response,"loginn");
+     if(response.status===200){
+        localStorage.setItem('token',response.data.token)
+            navigate('/')
         }
     } catch (error) {
         console.log(error);
