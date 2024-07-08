@@ -21,7 +21,7 @@ const Home = () => {
   const handleApi = async () => {
     try {
       setLoading(true); 
-      const response = await axios.get(`${baseurl}/user/weather/current?city=${data}`);
+      const response = await axios.get(`${baseurl}/weather/current?city=${data}`);
       setWeatherData(response.data.data);
       setSunrise(convertUnixToTime(response.data.data?.sys?.sunrise));
       setSunset(convertUnixToTime(response.data.data?.sys?.sunset));
